@@ -121,7 +121,7 @@
 
                 var btnDescargar  = '<a href="{{ asset("archivos_usuario/nombreArchivo") }}" download="" class="btn btn-icons btn-rounded btn-outline-primary btn-sm"><i class="mdi mdi-cloud-download"></i></a> '.replace("nombreArchivo", res.archivo);
                 var btnEditar     = '<button id="btnEditarArchivo" class="btnEditarArchivo btn btn-icons btn-rounded btn-outline-warning" data-toggle="modal" data-id="{idArchivo}" data-nombre="{nombreArchivo}" data-desc="{descArchivo}" data-target="#modalEditarArchivo"><i class="mdi mdi-pencil"></i></button> '.replace("{idArchivo}", res.id).replace("{nombreArchivo}", res.nombre).replace("{descArchivo}", res.descripcion);
-                var btnEliminar   = '<button class="btn btn-icons btn-rounded btn-outline-danger" data-toggle="modal" data-target="#modalEliminarArchivo"><i class="mdi mdi-close-circle"></i></a> '; 
+                var btnEliminar   = '<button class="btnEliminarArchivo btn btn-icons btn-rounded btn-outline-danger" data-toggle="modal" data-id="{idArchivo}" data-target="#modalEliminarArchivo"><i class="mdi mdi-close-circle"></i></button>'.replace("{idArchivo}", res.id); 
 
                 if (res.status) {
                   newRow = '<tr id="tr'+res.id+'">';
@@ -156,7 +156,6 @@
             $('.descripcion').val( desc );
           });
 
-
           $("#formuEditarArchivo").on("submit", function(e){
               e.preventDefault();
               var idArchivo       = $('.idArchivo').val();
@@ -188,7 +187,6 @@
                 var msje = res.mensaje;
                 var head = (res.status) ? "¡Bien!" : "Error";
                 var icon = (res.status) ? "success" : "warning";
-                var newRow = "";
                 $('#modalEditarArchivo').modal('toggle');
 
                 if (res.status) {
@@ -209,10 +207,65 @@
                 })
               });
           });
+
+          $(document).on("click", ".btnEliminarArchivo", function () {
+            var id = $(this).data('id');
+            $('.idArchivo').val( id );
+          });
+
+          $("#formuEliminarArchivo").on("submit", function(e){
+            e.preventDefault();
+            var idArchivo       = $('.idArchivo').val();
+            var formulario      = $(this); 
+            var tr              = $('#tr'+idArchivo);
+            var url             = formulario.attr('action').replace("{id}", idArchivo);
+
+            // alert(url);
+            // var tdNombre        = tr.children('td:nth-child(1)');
+            // var tdDesc          = tr.children('td:nth-child(2)');
+            // var tdBtnDescargar  = tr.children('td:nth-child(3)').children('a:nth-child(1)');
+            // var tdBtnEditar     = tr.children('td:nth-child(3)').children('button:nth-child(2)');
+            // var tdBtnEliminar   = tr.children('td:nth-child(3)').children('a:nth-child(3)');
+
+            $.ajax({
+              url: url,
+              type: "post",
+              dataType: "html",
+              data: formulario.serialize()
+            })
+            .done(function(respuesta){
+
+              console.log(respuesta);
+
+              var res = JSON.parse(respuesta); console.log(res);
+              var msje = res.mensaje;
+              var head = (res.status) ? "¡Bien!" : "Error";
+              var icon = (res.status) ? "success" : "warning";
+              $('#modalEliminarArchivo').modal('toggle');
+              tr.remove();
+
+              // if (res.status) {
+              //   tdNombre.text(res.nombre);
+              //   tdDesc.text(res.descripcion);
+              //   tdBtnDescargar.attr("href", res.url+"/"+res.archivo);
+              //   tdBtnDescargar.attr("download", res.archivo);
+              // }
+
+              $.toast({
+                heading: head,
+                text: msje,
+                showHideTransition: 'slide',
+                icon: icon,
+                loaderBg: '#f96868',
+                position: 'top-right',
+                hideAfter: 6000 
+              })
+            });
+          });
+
+
           
       });
-      
-
 
       /*function jsEval_guardarRespuesta(urlModulo, idRelacion, idPregunta, input){
         //console.log($('#'+input).find('.noUi-tooltip').html());

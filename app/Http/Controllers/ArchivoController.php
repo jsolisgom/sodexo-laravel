@@ -60,11 +60,11 @@ class ArchivoController extends Controller
         $ruta = "";
         $nombreArchivo = "";
         $extension = "";
+        $url = url('/archivos_usuario');
         
-        if ($request->file('archivo')) {
+        if ($request->hasFile('archivo')) {
             $documento      = $request->file('archivo');
             $ruta           = public_path() . '/archivos_usuario';
-            $url           = url('/archivos_usuario');
             $nombreArchivo  = uniqid() . $documento->getClientOriginalName(); //nombre del archivo fisico
             $extension      = $documento->extension();
 
@@ -104,6 +104,34 @@ class ArchivoController extends Controller
             "mensaje" => $mensaje
         );
 
-         return $respuesta;
+        return $respuesta;
+    }
+
+    public function destroy($id){
+        $archivo = Archivo::find($id); 
+
+        $ruta = public_path() . '/archivos_usuario';
+
+        if (file_exists($ruta."/".$archivo->archivo)) {
+            unlink($ruta."/".$archivo->archivo);
+        }
+    
+        $eliminaArchivo = $archivo->delete();
+
+        if ($eliminaArchivo) {
+            $status  = true;
+            $mensaje = "Archivo eliminado correctamente";
+        }else{
+            $status  = false;
+            $mensaje = "Ha ocurrido un error, reintentar";
+        }
+
+        $respuesta = array(
+            "ruta" => $ruta,
+            "status" => $status,
+            "mensaje" => $mensaje
+        );
+
+        return $respuesta; //response()->json($respuesta); //json_encode($respuesta);
     }
 }

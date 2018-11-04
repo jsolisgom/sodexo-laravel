@@ -26,3 +26,4 @@ Route::get('/curriculum', 'UsuarioController@index');
 Route::get('/documentos', 'ArchivoController@index');
 Route::post('/documentos', 'ArchivoController@store');
 Route::post('/documentos/{id}/edit', 'ArchivoController@update');
+Route::post('/documentos/{id}/delete', 'ArchivoController@destroy');

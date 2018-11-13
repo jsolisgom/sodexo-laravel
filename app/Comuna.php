@@ -9,4 +9,8 @@ class Comuna extends Model
     public function region(){
         return $this->belongsTo(Region::class);
     }
+
+    public function datosContacto(){
+        return $this->hasMany(DatoContacto::class);
+    }
 }

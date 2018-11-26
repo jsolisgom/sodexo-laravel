@@ -30,4 +30,20 @@ class User extends Authenticatable
     public function archivos(){
         return $this->hasMany(Archivo::class);
     }
+
+    public function datosEnseñanzaSuperior(){
+        return $this->hasMany(DatoEnsenanzaSuperior::class);
+    }
+
+    public function datosExperiencia(){
+        return $this->hasMany(DatoExperiencia::class);
+    }
+
+    public function datosInformaticos(){
+        return $this->hasMany(DatoInformatico::class);
+    }
+    
+    public function datosIdiomas(){
+        return $this->hasMany(DatoIdioma::class);
+    }
 }

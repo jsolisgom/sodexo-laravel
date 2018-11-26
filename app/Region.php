@@ -11,4 +11,8 @@ class Region extends Model
     public function comunas(){
         return $this->hasMany(Comuna::class);
     }
+
+    public function datosExperiencia(){
+        return $this->hasMany(DatosExperiencia::class);
+    }
 }

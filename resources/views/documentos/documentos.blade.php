@@ -37,29 +37,35 @@
                                             <td id="tdNombre{{ $archivo->id }}">{{ $archivo->nombre }}</td>
                                             <td id="tdDesc{{ $archivo->id }}">{{ $archivo->descripcion }}</td>
                                             <td class="text-danger">
-                                                <a 
-                                                    href="{{ asset('archivos_usuario/'.$archivo->archivo) }}" 
-                                                    download="{{$archivo->archivo}}" 
-                                                    class="btn btn-icons btn-rounded btn-outline-primary">
-                                                    <i class="mdi mdi-cloud-download"></i>
-                                                </a>
-                                                <button 
-                                                    id="btnEditarArchivo" 
-                                                    class="btnEditarArchivo btn btn-icons btn-rounded btn-outline-warning" 
-                                                    data-toggle="modal" data-id="{{ $archivo->id }}" 
-                                                    data-nombre="{{ $archivo->nombre }}" 
-                                                    data-desc="{{ $archivo->descripcion }}" 
-                                                    data-target="#modalEditarArchivo">
-                                                    <i class="mdi mdi-pencil"></i>
-                                                </button>
-                                                <button 
-                                                    id="btnEliminarArchivo" 
-                                                    class="btnEliminarArchivo btn btn-icons btn-rounded btn-outline-danger" 
-                                                    data-toggle="modal" 
-                                                    data-target="#modalEliminarArchivo" 
-                                                    data-id="{{ $archivo->id }}" >
-                                                    <i class="mdi mdi-close-circle"></i>
-                                                </button>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <form method="post" action="{{ url('documentos/'.$archivo->id.'/download') }}">
+                                                            {{ csrf_field() }}
+                                                            <button type="submit" class="btn btn-icons btn-rounded btn-outline-primary"><i class="mdi mdi-cloud-download"></i></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button 
+                                                            id="btnEditarArchivo" 
+                                                            class="btnEditarArchivo btn btn-icons btn-rounded btn-outline-warning" 
+                                                            data-toggle="modal" data-id="{{ $archivo->id }}" 
+                                                            data-nombre="{{ $archivo->nombre }}" 
+                                                            data-desc="{{ $archivo->descripcion }}" 
+                                                            data-target="#modalEditarArchivo">
+                                                            <i class="mdi mdi-pencil"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button 
+                                                            id="btnEliminarArchivo" 
+                                                            class="btnEliminarArchivo btn btn-icons btn-rounded btn-outline-danger" 
+                                                            data-toggle="modal" 
+                                                            data-target="#modalEliminarArchivo" 
+                                                            data-id="{{ $archivo->id }}" >
+                                                            <i class="mdi mdi-close-circle"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>  
                                             </td>
                                         </tr>
                                         @endforeach

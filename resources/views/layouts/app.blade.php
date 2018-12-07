@@ -5,6 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -87,10 +88,12 @@
   <script src="../../js/settings.js"></script>
   <script src="../../js/todolist.js"></script>
   <script src="../../js/toastDemo.js"></script>
+  <script src="../../js/documentos/script.js"></script>
+  <script src="../../js/curriculum/script.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
-  <script>
+  <!-- <script>
       $(function(){
           $("#formuSubirArchivo").on("submit", function(e){
               e.preventDefault();
@@ -220,13 +223,6 @@
             var tr              = $('#tr'+idArchivo);
             var url             = formulario.attr('action').replace("{id}", idArchivo);
 
-            // alert(url);
-            // var tdNombre        = tr.children('td:nth-child(1)');
-            // var tdDesc          = tr.children('td:nth-child(2)');
-            // var tdBtnDescargar  = tr.children('td:nth-child(3)').children('a:nth-child(1)');
-            // var tdBtnEditar     = tr.children('td:nth-child(3)').children('button:nth-child(2)');
-            // var tdBtnEliminar   = tr.children('td:nth-child(3)').children('a:nth-child(3)');
-
             $.ajax({
               url: url,
               type: "post",
@@ -244,13 +240,6 @@
               $('#modalEliminarArchivo').modal('toggle');
               tr.remove();
 
-              // if (res.status) {
-              //   tdNombre.text(res.nombre);
-              //   tdDesc.text(res.descripcion);
-              //   tdBtnDescargar.attr("href", res.url+"/"+res.archivo);
-              //   tdBtnDescargar.attr("download", res.archivo);
-              // }
-
               $.toast({
                 heading: head,
                 text: msje,
@@ -266,60 +255,7 @@
 
           
       });
-
-      /*function jsEval_guardarRespuesta(urlModulo, idRelacion, idPregunta, input){
-        //console.log($('#'+input).find('.noUi-tooltip').html());
-        var idAlternativaPregunta = $('#'+input).find('.noUi-tooltip').html().trim();
-        $.ajax({
-              dataType: 'json',
-              type:'POST',
-              url: "." + urlModulo + '/guardarRespuesta',
-              data: {
-                idRelacion: idRelacion,
-                idPregunta: idPregunta,
-                idAlternativaPregunta: idAlternativaPregunta
-              },
-              success:function(respuesta){
-                  if(respuesta == 1){
-                      var respuestas = $("#respuestas").val();
-                      if($('#'+input).closest(".rowPregunta").find(".iconoGuardar").html().trim() == ""){
-                          respuestas = parseInt(respuestas) + 1;
-                          $("#respuestas").val(respuestas);
-                      }
-                      
-                      $('#'+input).closest(".rowPregunta").find(".iconoGuardar").html('<i title="Guardado correcto" class="material-icons text-success gCorrecto">done_all</i>');
-                  }else if(respuesta == 2){
-                      var respuestas = $("#respuestas").val();
-                      respuestas = parseInt(respuestas) - 1;
-                      $("#respuestas").val(respuestas);
-                      $('#'+input).closest(".rowPregunta").find(".iconoGuardar").html('');
-                  }else{
-                      $('#'+input).closest(".rowPregunta").find(".iconoGuardar").html('<i title="Eroor al guardar" class="material-icons text-danger">clear</i>');
-                  }
-
-                
-              },
-              statusCode: {
-                  401: function() { 
-                      window.location.href = 'login'; 
-                  },
-                  419: function() { 
-                      window.location.href = 'login'; 
-                  },
-                  500: function() { 
-                      $('#'+input).closest(".rowPregunta").find(".iconoGuardar").html('<i title="Eroor al guardar" class="material-icons text-danger">clear</i>');
-                  }
-              },
-              error: {
-              },
-              complete: function(){
-                  var respondidas = $('#'+input).closest(".rowCompetencia").find(".gCorrecto");
-                  $('#'+input).closest(".rowCompetencia").find(".respondidas").html(respondidas.length);
-                  jsEval_cambiarNotaTimepoReal(urlModulo, idRelacion);
-              }
-        });
-      }*/
-  </script>
+  </script> -->
 </body>
 
 

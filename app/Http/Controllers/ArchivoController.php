@@ -18,7 +18,7 @@ class ArchivoController extends Controller
         $documento      = $request->file('archivo');
         $nombreForm     = $request->input('titulo'); //nombre del archivo ingresado desde el formulario
         $descripcion    = $request->input('descripcion');
-        $ruta           = public_path() . '/archivos_usuario' ;
+        $ruta           = storage_path() . '/archivos_usuario' ;
         $url            = url('/archivos_usuario');
         $nombreArchivo  = uniqid() . $documento->getClientOriginalName(); //nombre del archivo fisico
         $extension      = $documento->extension();
@@ -64,7 +64,7 @@ class ArchivoController extends Controller
         
         if ($request->hasFile('archivo')) {
             $documento      = $request->file('archivo');
-            $ruta           = public_path() . '/archivos_usuario';
+            $ruta           = storage_path() . '/archivos_usuario';
             $nombreArchivo  = uniqid() . $documento->getClientOriginalName(); //nombre del archivo fisico
             $extension      = $documento->extension();
 
@@ -110,7 +110,7 @@ class ArchivoController extends Controller
     public function destroy($id){
         $archivo = Archivo::find($id); 
 
-        $ruta = public_path() . '/archivos_usuario';
+        $ruta = storage_path() . '/archivos_usuario';
 
         if (file_exists($ruta."/".$archivo->archivo)) {
             unlink($ruta."/".$archivo->archivo);
@@ -133,5 +133,12 @@ class ArchivoController extends Controller
         );
 
         return $respuesta; //response()->json($respuesta); //json_encode($respuesta);
+    }
+
+    public function downloadFile($id){
+        $archivo = Archivo::find($id); 
+
+        $ruta = storage_path()."/archivos_usuario/".$archivo->archivo;
+        return response()->download($ruta, $archivo->archivo);
     }
 }

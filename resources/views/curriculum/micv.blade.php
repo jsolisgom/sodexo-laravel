@@ -40,7 +40,7 @@
                         <div class="form-group row">
                             <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Correo</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" placeholder="Ingresar correo">
+                                <input type="email" class="form-control guardarRespuesta" data-modelo="usuario" data-campo="email" placeholder="Ingresar correo" value="{{ Auth::user()->email }}">
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="form-group row">
                             <label for="exampleInputPassword2" class="col-sm-2 col-form-label">Dirección</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Password">
+                                <input type="text" class="form-control guardarRespuesta" data-modelo="datoContacto" data-campo="direccion" placeholder="Ingresar Dirección" value="{{ !empty($datosContacto->direccion) ? $datosContacto->direccion : '' }}">
                             </div>
                         </div>
                     </div>
@@ -59,12 +59,15 @@
                         <div class="form-group row">
                             <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Región</label>
                             <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option disabled selected value="">Seleccionar</option>
-                                    <option value="2">Región Metropolitana</option>
-                                    <option value="3">Región Tarapaca</option>
-                                    <option value="4">Región Antofagasta</option>
-                                    <option value="4">Región Atacama</option>
+                                <select id="selectRegion" class="form-control" data->
+                                    <option selected value="">Seleccionar</option>
+                                        @foreach ($regiones as $region)
+                                            @if ( !empty($datosContacto->comuna->region_id) && $datosContacto->comuna->region_id == $region->id)
+                                                <option selected value="{{ $region->id }}">{{ $region->region }}</option>
+                                            @else
+                                                <option value="{{ $region->id }}">{{ $region->region }}</option>
+                                            @endif
+                                        @endforeach
                                 </select>
                             </div>
                         </div>
@@ -73,9 +76,8 @@
                         <div class="form-group row">
                             <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Comuna</label>
                             <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option disabled selected value="">Seleccionar</option>
-                                    <option value="2">Maipú</option>
+                                <select id="selectComuna" class="form-control guardarRespuesta" data-modelo="datoContacto" data-campo="comuna_id" data-seleccion="{{ !empty($datosContacto->comuna->id) ? $datosContacto->comuna->id : '' }}">
+                                    <option selected value="">Seleccionar</option>
                                 </select>
                             </div> 
                         </div>
@@ -87,7 +89,7 @@
                         <div class="form-group row">
                             <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Telefono fijo</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Ingresar telefono fijo">
+                                <input type="text" class="form-control guardarRespuesta" placeholder="Ingresar telefono fijo" data-modelo="datoContacto" data-campo="fono_fijo" value="{{ !empty($datosContacto->fono_fijo) ? $datosContacto->fono_fijo : '' }}">
                             </div>
                         </div>
                     </div>
@@ -95,7 +97,7 @@
                         <div class="form-group row">
                             <label for="exampleInputPassword2" class="col-sm-2 col-form-label">Telefono celular</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="ingresar telefono celular">
+                                <input type="text" class="form-control guardarRespuesta" placeholder="ingresar telefono celular" data-modelo="datoContacto" data-campo="celular" value="{{ !empty($datosContacto->celular) ? $datosContacto->celular : '' }}">
                             </div>
                         </div>
                     </div>

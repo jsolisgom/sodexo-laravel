@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany(Archivo::class);
     }
 
+    public function datosContacto(){
+        return $this->hasOne(DatoContacto::class);
+    }
+
     public function datosEnseñanzaSuperior(){
         return $this->hasMany(DatoEnsenanzaSuperior::class);
     }

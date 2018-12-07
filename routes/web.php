@@ -21,9 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/curriculum', 'UsuarioController@index');
 
+Route::post('/usuarios/edit', 'UsuarioController@update');
+
+Route::post('/comunas/get', 'ComunaController@getComunasByRegionId');
 
 
 Route::get('/documentos', 'ArchivoController@index');
 Route::post('/documentos', 'ArchivoController@store');
 Route::post('/documentos/{id}/edit', 'ArchivoController@update');
 Route::post('/documentos/{id}/delete', 'ArchivoController@destroy');
+Route::post('/documentos/{id}/download', 'ArchivoController@downloadFile');

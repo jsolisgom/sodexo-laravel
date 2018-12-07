@@ -11,4 +11,8 @@ class DatoContacto extends Model
     public function comuna(){
         return $this->belongsTo(Comuna::class); //pertenece a
     }
+
+    public function usuario(){
+        return $this->belongsTo(User::class); //pertenece a
+    }
 }

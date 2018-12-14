@@ -11,7 +11,7 @@ class ComunaController extends Controller
     public function getComunasByRegionId(Request $request){
 
         $id_region  = $request->get('id');
-        $comunas    = Comuna::with('region')->where('region_id', $id_region)->get();
+        $comunas    = Comuna::with('region')->where('region_id', $id_region)->toSql(); dd($comunas);
 
         return $comunas;
 

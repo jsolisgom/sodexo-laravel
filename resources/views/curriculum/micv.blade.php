@@ -119,9 +119,10 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Estado</label>
                                 <div class="col-sm-8">
                                     <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Completa</option>
-                                        <option value="3">Incompleta</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @foreach ($estados as $estado)
+                                        <option value="{{ $estado->id }}">{{ $estado->estado }}</option> 
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -131,11 +132,10 @@
                                 <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Último curso aprobado</label>
                                 <div class="col-sm-8">
                                     <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">1° Básico</option>
-                                        <option value="3">2° Básico</option>
-                                        <option value="4">3° Básico</option>
-                                        <option value="4">4° Básico</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @foreach ($cursosBasica as $curso)
+                                        <option value="{{ $curso->id }}">{{ $curso->curso }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -154,9 +154,10 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Estado</label>
                                 <div class="col-sm-8">
                                     <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Completa</option>
-                                        <option value="3">Incompleta</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @foreach ($estados as $estado)
+                                        <option value="{{ $estado->id }}">{{ $estado->estado }}</option> 
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -166,11 +167,10 @@
                                 <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Último curso aprobado</label>
                                 <div class="col-sm-8">
                                     <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">1° Básico</option>
-                                        <option value="3">2° Básico</option>
-                                        <option value="4">3° Básico</option>
-                                        <option value="4">4° Básico</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @foreach ($cursosMedia as $curso)
+                                        <option value="{{ $curso->id }}">{{ $curso->curso }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -183,8 +183,9 @@
                                 <div class="col-sm-8">
                                     <select class="form-control">
                                         <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Tecnico profesional</option>
-                                        <option value="3">Cientifico humanista</option>
+                                        @foreach ($tipoMedia as $tipo)
+                                        <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -194,11 +195,10 @@
                                 <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Área de estudio</label>
                                 <div class="col-sm-8">
                                     <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Alimentacion / Gastronomia</option>
-                                        <option value="3">2° Básico</option>
-                                        <option value="4">3° Básico</option>
-                                        <option value="4">4° Básico</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @foreach ($areaMedia as $area)
+                                        <option value="{{ $area->id }}">{{ $area->area }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -210,72 +210,18 @@
 
                 <!-- ENSEÑANZA SUPERIOR -->
                 <div>
-                    <h5 style="color:#2A295C;">Enseñanza superior</h5><br>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tipo</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Completa</option>
-                                        <option value="3">Incompleta</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <h5 style="color:#2A295C;">Enseñanza superior</h5>
+                            <a href="#" class="text-success font-weight-bold" style="font-size: 13px;" data-toggle="modal" data-target="#modalAgregarEnsenanzaSuperior"> <i class="icon-plus"></i> Agregar</a>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Institución</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control" placeholder="Ingresar institución">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Carrera</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control" placeholder="Ingresar intitución">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Situación</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option disabled selected value="">Seleccionar</option>
-                                        <option value="2">Completa</option>
-                                        <option value="3">Incompleta</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Periodo</label>
-                                <div class="col-sm-4">
-                                    <input class="form-control" data-inputmask="'alias': 'date'" placeholder="Desde" />
-                                </div>
-                                <div class="col-sm-4">
-                                    <input class="form-control" data-inputmask="'alias': 'date'" placeholder="Hasta" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> <br>
                     <hr>
                 </div>
                 <!-- /ENSEÑANZA SUPERIOR -->
 
                 <!-- OTROS ESTUDIOS -->
-                <div>
+                <!-- <div>
                     <h5 style="color:#2A295C;">Otros estudios</h5><br>
                     <div class="row">
                         <div class="col-md-6">
@@ -321,7 +267,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /OTROS ESTUDIOS-->
             </div>
         </div> <br>
@@ -401,4 +347,6 @@
 
     </div>
 </div>
+
+@include('curriculum.modalEnsenanzaSuperior')
 @endsection

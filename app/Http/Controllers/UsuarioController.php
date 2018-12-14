@@ -13,13 +13,59 @@ class UsuarioController extends Controller
 {
     public function index()
     {
+        $estados = collect([
+            (object)(['id' => 0, 'estado' => 'Incompleta']),
+            (object)(['id' => 1, 'estado' => 'Completa'])
+        ]);
+
+        $cursosBasica = collect([
+            (object)(['id' => 0, 'curso' => '1° Básico']),
+            (object)(['id' => 1, 'curso' => '2° Básico']),
+            (object)(['id' => 2, 'curso' => '3° Básico']),
+            (object)(['id' => 3, 'curso' => '4° Básico']),
+            (object)(['id' => 4, 'curso' => '5° Básico']),
+            (object)(['id' => 5, 'curso' => '6° Básico']),
+            (object)(['id' => 6, 'curso' => '7° Básico']),
+            (object)(['id' => 7, 'curso' => '8° Básico'])
+        ]);
+
+        $cursosMedia = collect([
+            (object)(['id' => 0, 'curso' => '1° Medio']),
+            (object)(['id' => 1, 'curso' => '2° Medio']),
+            (object)(['id' => 2, 'curso' => '3° Medio']),
+            (object)(['id' => 3, 'curso' => '4° Medio'])
+        ]);
+
+        $tipoMedia = collect([
+            (object)(['id' => 0, 'tipo' => 'Técnico Profesional']),
+            (object)(['id' => 1, 'tipo' => 'Científico - Humanista'])
+        ]);
+
+        $areaMedia = collect([
+            (object)(['id' => 0, 'area' => 'Alimentación / Gastronomia']),
+            (object)(['id' => 1, 'area' => 'Industrial / Electrónica / Mantención']),
+            (object)(['id' => 2, 'area' => 'Parvulos']),
+            (object)(['id' => 3, 'area' => 'Contabilidad / Finanzas']),
+            (object)(['id' => 4, 'area' => 'Administración de Empresas']),
+            (object)(['id' => 5, 'area' => 'Secretariado / Recepcionista']),
+            (object)(['id' => 6, 'area' => 'Agrícola / Agropecuario']),
+            (object)(['id' => 7, 'area' => 'Hotelería / Turismo']),
+            (object)(['id' => 8, 'area' => 'Tecnologia / Comunicaciones'])
+        ]);
+
+        $tipoSuperior = collect([
+            (object)(['id' => 0, 'tipo' => 'Sin enseñanza superior']),
+            (object)(['id' => 1, 'tipo' => 'Universitario']),
+            (object)(['id' => 2, 'tipo' => 'Instituto Profesional']),
+            (object)(['id' => 3, 'tipo' => 'Centro de Formación Técnica'])
+        ]);
 
         $usuario        = Auth::user();
-        $datosContacto  = DatoContacto::with('comuna')->find($usuario->datos_contacto_id); //dd($datosContacto->comuna->region_id);
+        $datosContacto  = DatoContacto::with('comuna')->find($usuario->datos_contacto_id); //dd($datosContacto->comuna->region->region);
         $regiones       = Region::all();
-        $comunas        = Comuna::all();
+        $comunas        = Comuna::all(); 
 
-        return view('curriculum.micv')->with( compact('regiones', 'comunas', 'datosContacto') );
+        return view('curriculum.micv')->with( compact('regiones', 'comunas', 'datosContacto', 'estados', 'cursosBasica', 'cursosMedia', 'tipoMedia', 'areaMedia', 'tipoSuperior') );
     }
 
     public function update(Request $request){
